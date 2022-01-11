@@ -77,7 +77,7 @@ class _RemotePageState extends State<RemotePage> {
   var numberButtonTextStyle = const TextStyle(color: Colors.white);
 
   var volAndChButtonStyle = ElevatedButton.styleFrom(
-      fixedSize: const Size(60, 100),
+      fixedSize: const Size(65, 100),
       primary: buttonColor,
       side: const BorderSide(color: buttonOutlineColor)
     //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
