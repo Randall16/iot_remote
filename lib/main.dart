@@ -49,7 +49,8 @@ class RemotePage extends StatefulWidget {
 
 class _RemotePageState extends State<RemotePage> {
 
-  late final RemoteService remoteService; // = RemoteService();
+  final String _ip_key = 'IoT_Remote_IP_Address';
+  late final RemoteService remoteService;
 
   void _handleButtonPress(RemoteButton remoteButton) async {
     final callSucceeded = await remoteService.sendButton(remoteButton);
@@ -63,8 +64,10 @@ class _RemotePageState extends State<RemotePage> {
     }
   }
 
-  void _setIpAddress(String ip) {
-    remoteService.saveIpAddress(ip);
+  void _setIpAddress(String ip) async {
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setString(_ip_key, ip);
+    remoteService.setIpAddress(ip);
   }
 
   var numberButtonStyle = ElevatedButton.styleFrom(
@@ -99,7 +102,8 @@ class _RemotePageState extends State<RemotePage> {
 
   void _createRemoteService() async {
     final sp = await SharedPreferences.getInstance();
-    remoteService = RemoteService(sp);
+    final ip = sp.getString(_ip_key) ?? '192.168.254.10';
+    remoteService = RemoteService(ip);
   }
 
   @override

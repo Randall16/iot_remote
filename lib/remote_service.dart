@@ -4,32 +4,22 @@ import 'dart:developer';
 
 import 'package:iot_remote/RemoteButton.dart';
 import 'package:iot_remote/apiKey.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 
 class RemoteService {
 
-  final String _IP_KEY = 'ip_address';
+  late String _url;
 
-  String _url = 'NOT_SET';
+  RemoteService(String ipAddress) {
+    setIpAddress(ipAddress);
+  }
 
-  final SharedPreferences prefs;
-
-  RemoteService(SharedPreferences sharedPreferences): prefs = sharedPreferences;
-
-  void saveIpAddress(String ipAddress) async {
-    prefs.setString(_IP_KEY, ipAddress);
-
-    final tes = prefs.getString(_IP_KEY) ?? 'NOTHING';
+  void setIpAddress(String ipAddress) {
     _url = 'http://$ipAddress:5000/api/';
   }
 
   Future<bool> sendButton(RemoteButton remoteButton) async {
-    if (_url == 'NOT_SET') {
-      loadIpAddress();
-    }
-
     final uri = Uri.parse(_url + convertRemoteButtonToApiString(remoteButton));
 
     try {
@@ -40,9 +30,5 @@ class RemoteService {
       return false;
     }
 
-  }
-
-  void loadIpAddress() async {
-    _url = prefs.getString(_IP_KEY) ?? _url;
   }
 }
