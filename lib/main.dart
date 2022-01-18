@@ -8,8 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 
-//const Color buttonColor = Color(0xFFE7E7E7);
-//const Color buttonColor = Color(0xD91F1F1F);
 const Color buttonColor = Color(0xFF2D2D2D);
 const Color buttonOutlineColor = Color(0xff3d3d3d);
 
@@ -83,7 +81,6 @@ class _RemotePageState extends State<RemotePage> {
       fixedSize: const Size(65, 100),
       primary: buttonColor,
       side: const BorderSide(color: buttonOutlineColor)
-    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
   );
 
   void handleClick(String value) {
@@ -111,7 +108,7 @@ class _RemotePageState extends State<RemotePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leading: Icon(Icons.tv, color: Colors.deepPurple),
+        leading: const Icon(Icons.tv, color: Colors.deepPurple),
         title: Text(widget.title),
         backgroundColor: backGroundColor,
         actions: <Widget>[
@@ -182,16 +179,16 @@ class _RemotePageState extends State<RemotePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Spacer(),
+                const Spacer(),
                 Column(
                   children: [
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     ElevatedButton(style: volAndChButtonStyle,
-                        child: Text('Vol+'),
+                        child: const Text('Vol+'),
                         onPressed: () => _handleButtonPress(RemoteButton.volumeUp)),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     ElevatedButton(style: volAndChButtonStyle,
-                        child: Text('Vol-'),
+                        child: const Text('Vol-'),
                         onPressed: () => _handleButtonPress(RemoteButton.volumeDown))
                   ],
                 ),
@@ -248,41 +245,45 @@ class _RemotePageState extends State<RemotePage> {
                 ),
                 Column(
                   children: [
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     ElevatedButton(style: volAndChButtonStyle,
-                        child: Text('Ch+'),
+                        child: const Text('Ch+'),
                         onPressed: () => _handleButtonPress(RemoteButton.channelUp)),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     ElevatedButton(style: volAndChButtonStyle,
-                        child: Text('Ch-'),
+                        child: const Text('Ch-'),
                         onPressed: () => _handleButtonPress(RemoteButton.channelDown))
                   ],
                 ),
-                Spacer()
+                const Spacer()
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                const Spacer(flex: 1),
                 Center(
                   child: Ink(
-                    decoration: const ShapeDecoration(
-                      color: buttonColor,
-                      shape: CircleBorder(),
+                      decoration: BoxDecoration(
+                          color: buttonColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: buttonOutlineColor)
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.volume_off),
+                        color: Colors.grey,
+                        iconSize: 35,
+                        onPressed: () => _handleButtonPress(RemoteButton.mute),
+                      ),
                     ),
-                    child: IconButton(
-                      icon: const Icon(Icons.volume_off),
-                      color: Colors.grey,
-                      iconSize: 35,
-                      onPressed: () => _handleButtonPress(RemoteButton.mute),
-                    ),
-                  ),
                 ),
+                const Spacer(flex: 2),
                 Center(
                   child: Ink(
-                    decoration: const ShapeDecoration(
+                    decoration: BoxDecoration(
                         color: buttonColor,
-                        shape: CircleBorder()
+                        shape: BoxShape.circle,
+                        border: Border.all(color: buttonOutlineColor)
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.power_settings_new),
@@ -292,11 +293,13 @@ class _RemotePageState extends State<RemotePage> {
                     ),
                   ),
                 ),
+                const Spacer(flex: 2),
                 Center(
                   child: Ink(
-                    decoration: const ShapeDecoration(
-                      color: buttonColor,
-                      shape: CircleBorder(),
+                    decoration: BoxDecoration(
+                        color: buttonColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: buttonOutlineColor)
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.input),
@@ -305,7 +308,8 @@ class _RemotePageState extends State<RemotePage> {
                       onPressed: () => _handleButtonPress(RemoteButton.input),
                     ),
                   ),
-                )
+                ),
+                const Spacer(flex: 1),
               ],
             )
           ],
@@ -314,7 +318,7 @@ class _RemotePageState extends State<RemotePage> {
     );
   }
 
-  TextEditingController _textFieldController = TextEditingController();
+  final TextEditingController _textFieldController = TextEditingController();
   String valueText = '';
 
   Future<void> _displayTextInputDialog(BuildContext context) async {
@@ -330,13 +334,13 @@ class _RemotePageState extends State<RemotePage> {
                 });
               },
               controller: _textFieldController,
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
             ),
             actions: <Widget>[
               TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
               TextButton(onPressed: () {
                 _setIpAddress(valueText);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('IP has been set')));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('IP has been set')));
                 Navigator.pop(context);
               }, child: const Text('Confirm'))
             ],
