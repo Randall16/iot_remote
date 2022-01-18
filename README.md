@@ -1,16 +1,6 @@
-# iot_remote
+# IoT Remote
 
-IoT Remote Project
+A cross platform (Android/iOS) Flutter app to make API calls to a Flask web server I built [here](https://github.com/Randall16/TvRemoteBackend). This server is hosted locally on a RaspberryPI and sends IR signals to control my TV.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://user-images.githubusercontent.com/33976994/149875877-4c34cf35-ebc4-48a2-bb8d-d377b312d6ae.PNG" width=
+"250" height="475" />
