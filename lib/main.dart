@@ -311,7 +311,8 @@ class _RemotePageState extends State<RemotePage> {
                 ),
                 const Spacer(flex: 1),
               ],
-            )
+            ),
+            const SizedBox(width: double.infinity, height: 1)
           ],
         ),
       ),
